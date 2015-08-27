@@ -133,17 +133,17 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.5.1/elpa/auto-complete-1.5.0/dict/")
 (ac-config-default)
 (setq ac-ignore-case nil)
-(add-to-list 'ac-modes 'enh-ruby-mode)
-(add-to-list 'ac-modes 'web-mode)
+;;(add-to-list 'ac-modes 'enh-ruby-mode)
+;;(add-to-list 'ac-modes 'web-mode)
 
 ;;ag
 (add-to-list 'load-path "/Users/watsy/.emacs.d/github/ag.el/ag.el")
 (require 'ag)
 
-(require 'smartparens-config)
- (require 'smartparens-ruby)
- (smartparens-global-mode)
- (show-smartparens-global-mode t)
+;;(require 'smartparens-config)
+;;(require 'smartparens-ruby)
+;;(smartparens-global-mode)
+;;(show-smartparens-global-mode t)
 
 (add-to-list 'load-path "/Users/watsy/.emacs.d/github/grizzl")
 (load "grizzl")
@@ -157,14 +157,14 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 
 ;; highlight
-(add-to-list 'load-path "~/.emacs.d/github/Highlight-Indentation-for-Emacs")
-(load "highlight-indentation")
- (require 'highlight-indentation)
- (add-hook 'enh-ruby-mode-hook
-	              (lambda () (highlight-indentation-current-column-mode)))
-
- (add-hook 'coffee-mode-hook
-	              (lambda () (highlight-indentation-current-column-mode)))
+;; (add-to-list 'load-path "~/.emacs.d/github/Highlight-Indentation-for-Emacs")
+;; (load "highlight-indentation")
+;; (require 'highlight-indentation)
+;; (add-hook 'enh-ruby-mode-hook
+;;	              (lambda () (highlight-indentation-current-column-mode)))
+;;
+;; (add-hook 'coffee-mode-hook
+;;	              (lambda () (highlight-indentation-current-column-mode)))
 
 ;; Dash at point
 (add-to-list 'load-path "~/.emacs.d/github/dash-at-point")
@@ -193,6 +193,13 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 ;; map command to meta key
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+
+(eval-after-load 'enh-ruby-mode
+		  '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
+
+;; color
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/github/theme/emacs-color-theme-solarized")
+;; (load-theme 'solarized t)
 
 ;; {{ idle require other stuff
 (setq idle-require-idle-delay 3)
@@ -224,15 +231,16 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 ;; my personal setup, other major-mode specific setup need it.
 ;; It's dependent on init-site-lisp.el
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (whiteboard)))
+ '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(git-gutter:handled-backends (quote (svn hg git)))
- '(safe-local-variable-values (quote ((lentic-init . lentic-orgel-org-init))))
  '(session-use-package t nil (session)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -240,7 +248,3 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; End:
-(put 'erase-buffer 'disabled nil)
