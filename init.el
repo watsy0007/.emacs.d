@@ -2,6 +2,15 @@
 ;; -*- coding: utf-8 -*-
 (setq emacs-load-start-time (current-time))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/custom"))
+
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+
+(load "alpha-window.el")
+(global-set-key [(f9)] 'loop-alpha)
+;;(set-frame-parameter (selected-frame) 'alpha '(100 35))
+;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
@@ -118,6 +127,72 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 (require 'init-misc)
 (require 'init-color-theme)
 (require 'init-emacs-w3m)
+(load "init-custom-ruby")
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.5.1/elpa/auto-complete-1.5.0/dict/")
+(ac-config-default)
+(setq ac-ignore-case nil)
+(add-to-list 'ac-modes 'enh-ruby-mode)
+(add-to-list 'ac-modes 'web-mode)
+
+;;ag
+(add-to-list 'load-path "/Users/watsy/.emacs.d/github/ag.el/ag.el")
+(require 'ag)
+
+(require 'smartparens-config)
+ (require 'smartparens-ruby)
+ (smartparens-global-mode)
+ (show-smartparens-global-mode t)
+
+(add-to-list 'load-path "/Users/watsy/.emacs.d/github/grizzl")
+(load "grizzl")
+(require 'grizzl)
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-completion-system 'grizzl)
+;; Press Command-p for fuzzy find in project
+(global-set-key (kbd "s-p") 'projectile-find-file)
+;; Press Command-b for fuzzy switch buffer
+(global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
+
+;; highlight
+(add-to-list 'load-path "~/.emacs.d/github/Highlight-Indentation-for-Emacs")
+(load "highlight-indentation")
+ (require 'highlight-indentation)
+ (add-hook 'enh-ruby-mode-hook
+	              (lambda () (highlight-indentation-current-column-mode)))
+
+ (add-hook 'coffee-mode-hook
+	              (lambda () (highlight-indentation-current-column-mode)))
+
+;; Dash at point
+(add-to-list 'load-path "~/.emacs.d/github/dash-at-point")
+(autoload 'dash-at-point "dash-at-point"
+	  "Search the word at point with Dash." t nil)
+(global-set-key "\C-cd" 'dash-at-point)
+(global-set-key "\C-ce" 'dash-at-point-with-docset)
+(add-hook 'rinari-minor-mode-hook
+	            (lambda () (setq dash-at-point-docset "rails")))
+
+;; load rvm
+(add-to-list 'load-path "~/.emacs/github/rvm.el/rvm.el")
+(require 'rvm)
+(rvm-use-default)
+
+;; yasnippet
+(add-to-list 'load-path
+	                   "~/.emacs.d/github/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; rinari rails mode
+(add-to-list 'load-path "~/.emacs.d/github/rinari")
+(require 'rinari)
+
+;; map command to meta key
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
 
 ;; {{ idle require other stuff
 (setq idle-require-idle-delay 3)
@@ -155,6 +230,8 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (whiteboard)))
+ '(git-gutter:handled-backends (quote (svn hg git)))
  '(safe-local-variable-values (quote ((lentic-init . lentic-orgel-org-init))))
  '(session-use-package t nil (session)))
 (custom-set-faces
