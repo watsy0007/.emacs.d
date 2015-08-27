@@ -1,3 +1,16 @@
 # todo list
 1. 整理项目的目录结构
 2. 增加拼写检查
+
+# 使用方法
+
+```
+git clone https://github.com/watsy0007/.emacs.d.git ~/.emacs.d
+emacs
+```
+
+### 安装主题
+
+参考 https://github.com/purcell/color-theme-sanityinc-solarized
+
+
