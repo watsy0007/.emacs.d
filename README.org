@@ -1,3 +1,10 @@
+# 说明 
+
+基于[Setting up Emacs as Ruby development environment](http://crypt.codemancers.com/posts/2013-09-26-setting-up-emacs-as-development-environment-on-osx/) 改造而来。
+配置的目录结构和代码看起来非常丑，但是好用，能用。
+本着迭代的思想，后续会不断优化。
+
+
 # todo list
 1. 整理项目的目录结构
 2. 增加拼写检查
