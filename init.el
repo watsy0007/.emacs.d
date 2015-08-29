@@ -197,6 +197,10 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 (eval-after-load 'enh-ruby-mode
 		  '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
 
+;; ess 
+(add-to-list 'load-path "~/.emacs.d/custom/ess-15.03-1/lisp")
+(require 'ess-site)
+
 ;; {{ idle require other stuff
 (setq idle-require-idle-delay 3)
 (setq idle-require-symbols '(init-misc-lazy
