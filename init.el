@@ -201,6 +201,24 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 (add-to-list 'load-path "~/.emacs.d/custom/ess-15.03-1/lisp")
 (require 'ess-site)
 
+;; markdown
+(custom-set-variables
+   '(markdown-command "/usr/local/bin/pandoc"))
+(add-to-list 'load-path "~/.emacs.d/github/markdown-mode")
+(require 'markdown-mode)
+(autoload 'markdown-mode "markdown-mode"
+	     "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;;neo tree
+(add-to-list 'load-path "~/.emacs.d/github/neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(setq projectile-switch-project-action 'neotree-projectile-action)
+
 ;; {{ idle require other stuff
 (setq idle-require-idle-delay 3)
 (setq idle-require-symbols '(init-misc-lazy
