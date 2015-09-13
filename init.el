@@ -10,7 +10,7 @@
 (load "alpha-window.el")
 (global-set-key [(f9)] 'loop-alpha)
 
-(set-frame-font "Consolas 14")
+(set-frame-font "Consolas 13")
 ;;(set-frame-parameter (selected-frame) 'alpha '(100 35))
 ;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
@@ -191,6 +191,12 @@ We increase this to 16MB by `(my-optimize-gc 16 0.5)` "
 ;; rinari rails mode
 (add-to-list 'load-path "~/.emacs.d/github/rinari")
 (require 'rinari)
+
+;;shell env
+(add-to-list 'load-path "~/.emacs.d/github/exec-path-from-shell")
+(require 'exec-path-from-shell)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; map command to meta key
 (setq mac-command-modifier 'meta)
