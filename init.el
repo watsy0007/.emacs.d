@@ -9,6 +9,8 @@
 
 (load "alpha-window.el")
 (global-set-key [(f9)] 'loop-alpha)
+
+(set-default-font "Consolas 14")
 ;;(set-frame-parameter (selected-frame) 'alpha '(100 35))
 ;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
